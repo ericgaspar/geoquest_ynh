@@ -18,16 +18,6 @@ ynh_script_progression "Upgrading source files..."
 ynh_setup_source --dest_dir="$install_dir" --full_replace
 
 #=================================================
-# UPDATE A CONFIG FILE
-#=================================================
-ynh_script_progression "Updating $app's configuration files..."
-
-ynh_config_add --template="some_config_file" --destination="$install_dir/some_config_file"
-
-chmod 400 "$install_dir/some_config_file"
-chown "$app:$app" "$install_dir/some_config_file"
-
-#=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
@@ -36,7 +26,17 @@ ynh_config_add_nginx
 
 ynh_config_add_systemd
 
-yunohost service add "$app" --description="A short description of the app" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="A geography game" --log="/var/log/$app/$app.log"
+
+#=================================================
+# INSTALL GEOQUEST
+#=================================================
+ynh_script_progression "Installing the app..."
+
+pushd "$install_dir"
+ 	ynh_hide_warnings ynh_exec_as_app npm install
+ 	ynh_hide_warnings ynh_exec_as_app npm run build
+popd
 
 #=================================================
 # START SYSTEMD SERVICE
