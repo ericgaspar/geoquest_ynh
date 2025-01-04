@@ -9,14 +9,12 @@ description.fr = "Expliquez en *quelques* (10~15) mots l'utilité de l'app ou ce
 
 version = "1.0~ynh1"
 
-maintainers = ["johndoe"]
+maintainers = ["eric_G"]
 
 [upstream]
-license = "free" # you can see the available licenses identifiers list here: https://spdx.org/licenses/
+license = "free"
 website = "https://example.com"
 demo = "https://demo.example.com"
-admindoc = "https://yunohost.org/packaging_apps"
-userdoc = "https://yunohost.org/apps"
 code = "https://github.com/woutdp/geoquest"
 
 [integration]
@@ -38,7 +36,7 @@ ram.runtime = "50M"
 
     [install.path]
     type = "path"
-    default = "/example"
+    default = "/geoquest"
 
     [install.init_main_permission]
     type = "group"
@@ -62,3 +60,4 @@ ram.runtime = "50M"
     main.url = "/"
 
     [resources.ports]
+    main.default = 4173
